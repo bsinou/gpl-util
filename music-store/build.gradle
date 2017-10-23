@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+      		url "https://plugins.gradle.org/m2/"
+    	}
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: "io.spring.dependency-management"
+
+version = '0.0.1'
+description = 'Sort, backup and tag audio files'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+// TP Versions
+ext {
+	springBomVersion='2.0.8.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+    maven{
+    	url "https://dl.bintray.com/ijabz/maven"
+    } 
+}
+
+dependencyManagement {
+  imports {
+        mavenBom "io.spring.platform:platform-bom:$springBomVersion"
+  }
+  
+  // Override default provided version
+  dependencies {
+  }
+}
+
+dependencies {
+    compile (
+		// Specific Audio Dependencies
+		"net.jthink:jaudiotagger:2.2.5",
+		"com.mpatric:mp3agic:0.9.1",
+		
+		// DataSource
+	    "org.hsqldb:hsqldb",
+		// Spring
+		"org.springframework:spring-context-support",
+		"org.springframework:spring-jdbc",
+		// Spring Batch
+		"org.springframework.batch:spring-batch-core",
+		// Logging
+    	"ch.qos.logback:logback-classic",
+    	"org.slf4j:jcl-over-slf4j",
+	)
+
+    testCompile (
+		"junit:junit:4.11"
+	)
+    
+}
+
+// copy all used dependencies to a known folder
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
+}
+
+compileJava.dependsOn(clean)
+build.dependsOn(copyToLib)

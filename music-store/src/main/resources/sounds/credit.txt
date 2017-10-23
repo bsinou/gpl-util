@@ -1,0 +1,6 @@
+All test sounds have been downloaded from http://freesound.org/ and are licensed under the creative commons license 3.0, 
+see https://creativecommons.org/licenses/by/3.0/
+
+bark.wav by Puniho - see https://freesound.org/people/Puniho/sounds/115535/
+bell_25.ogg by danarobinsondesignsgmailcom - see http://freesound.org/people/danarobinsondesignsgmailcom/sounds/377722/
+bell_27.mp3 by danarobinsondesignsgmailcom - see http://freesound.org/people/danarobinsondesignsgmailcom/sounds/377730/
